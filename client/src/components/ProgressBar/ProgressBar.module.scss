@@ -1,0 +1,28 @@
+@import 'src/global';
+
+.background,
+.progress {
+  fill: none;
+}
+
+.background {
+  stroke: #ddd;
+}
+
+.progress {
+  stroke: $color-blue;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.percent {
+  font-size: 3em;
+  font-weight: bold;
+  fill: $color-blue;
+}
+
+.text {
+  font-size: 20px;
+  font-weight: bold;
+  fill: $color-blue;
+}

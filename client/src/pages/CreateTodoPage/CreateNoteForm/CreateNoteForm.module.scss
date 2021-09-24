@@ -1,0 +1,24 @@
+.wrapper {
+  height: 100%;
+  width: 80%;
+  margin: 48px auto;
+  flex: 1;
+}
+
+.label {
+  margin-top: 10px;
+  margin-bottom: 2px;
+  font-style: italic;
+  font-size: 20px;
+}
+
+input {
+  height: 40px;
+  border-radius: 4px;
+}
+
+.submitButton {
+  height: 50px;
+  width: 50%;
+  margin: 40px auto 0;
+}

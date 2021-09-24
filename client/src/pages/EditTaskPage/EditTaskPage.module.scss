@@ -1,0 +1,48 @@
+@import 'src/global';
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  background: $color-white;
+}
+
+.closeIcon {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  height: 40px;
+  cursor: pointer;
+}
+
+.form {
+  height: 100%;
+  width: 80%;
+  margin: 48px auto;
+  flex: 1;
+}
+
+.label {
+  margin-top: 10px;
+  margin-bottom: 2px;
+  font-style: italic;
+  font-size: 20px;
+}
+
+input {
+  height: 40px;
+  width: 100%;
+  border-radius: 4px;
+}
+
+.submitButton {
+  height: 50px;
+  width: 50%;
+  margin: 40px auto 0;
+}

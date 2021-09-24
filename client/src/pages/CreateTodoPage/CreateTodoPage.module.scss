@@ -1,0 +1,49 @@
+@import 'src/global';
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  background: $color-white;
+}
+
+.closeIcon {
+  position: absolute;
+  top: 25px;
+  right: 5px;
+  height: 40px;
+  cursor: pointer;
+}
+
+.switchTodoType {
+  display: flex;
+  height: 50px;
+  width: 40%;
+  min-width: 300px;
+  margin: 20px auto 0;
+  padding: 3px;
+  border-radius: 25px;
+  box-shadow: 0px 1px 6px 0px rgba(50, 50, 50, 0.6);
+
+  .type {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+
+    height: 100%;
+    border-radius: 25px;
+    padding: 0 10px;
+    cursor: pointer;
+
+    &.selected {
+      background: rgb(0, 190, 0);
+    }
+  }
+}
