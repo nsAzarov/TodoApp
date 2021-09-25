@@ -1,9 +1,8 @@
-<https://medical-information-system.herokuapp.com/>
-
 ## Quick Start
 
-``` bash
+```bash
 # run project
 npm run dev
 
 
+```
