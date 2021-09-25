@@ -49,11 +49,15 @@ export const TodosPage: FC<Props> = (props) => {
           }
         })}
         <div className={styles.pagination}>
-          <div onClick={() => setActivePage(activePage - 1)}>←</div>
-          <div>
-            {activePage}/{pagesCount}
+          <div className={styles.arrow} onClick={() => setActivePage(activePage - 1)}>
+            ←
           </div>
-          <div onClick={() => setActivePage(activePage + 1)}>→</div>
+          <div>
+            {activePage}/{pagesCount - 1}
+          </div>
+          <div className={styles.arrow} onClick={() => setActivePage(activePage + 1)}>
+            →
+          </div>
         </div>
       </div>
       <PrimaryButton onClick={() => setCreateTodoPageOpen(true)} className={styles.newTaskButton}>

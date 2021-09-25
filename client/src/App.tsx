@@ -11,19 +11,30 @@ export const App: FC = () => {
   const [activePage, setActivePage] = useState(0);
   const [pagesCount, setPagesCount] = useState(0);
 
+  const [doneTodosCount, setDoneTodosCount] = useState(0);
+
   const api = useMemo(() => ApiService.getInstance(), []);
 
   useEffect(() => {
     api.getTodos(activePage).then((res) => setTodos(res.map(mapProtoTodo)));
+    api.getDoneTodosCount().then((res) => setDoneTodosCount(res));
   }, [activePage, api]);
 
   useEffect(() => {
     api.getPagesCount().then((res) => setPagesCount(res));
   }, [activePage, api]);
 
+  const handleSetActivePage = useCallback(
+    (page: number) => {
+      if (page === 0) setActivePage(page);
+      else if (page < 0) setActivePage(pagesCount - (Math.abs(page) % pagesCount));
+      else setActivePage(page % pagesCount);
+    },
+    [pagesCount],
+  );
+
   const createTodo = useCallback(
     (todo: ITodo) => {
-      setTodos((prevTodos) => [...prevTodos, todo]);
       api.createTodo(todo);
     },
     [api],
@@ -68,13 +79,13 @@ export const App: FC = () => {
   );
 
   return isStartPageOpen ? (
-    <StartPage goToAllTasks={() => setIsStartPageOpen(false)} />
+    <StartPage goToAllTasks={() => setIsStartPageOpen(false)} doneTodosCount={doneTodosCount} />
   ) : (
     <TodosPage
       todos={todos}
       activePage={activePage}
       pagesCount={pagesCount}
-      setActivePage={setActivePage}
+      setActivePage={handleSetActivePage}
       createTodo={createTodo}
       editTask={editTask}
       toggleNoteDone={toggleNoteDone}
