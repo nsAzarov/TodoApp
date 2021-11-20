@@ -39,6 +39,15 @@ app.get('/DoneTodosCount', async (req, res) => {
         .catch(err => console.log(err));
 })
 
+app.get('/DoneTodos/:page', async (req, res) => {
+    const page = req.params.page;
+    await Todo.find({
+            done: true
+        }).limit(TODOS_PER_PAGE).skip(TODOS_PER_PAGE * page)
+        .then(todos => res.json(todos))
+        .catch(err => console.log(err));
+})
+
 app.get('/Todos/:page', async (req, res) => {
     const page = req.params.page;
     await Todo.find({}).limit(TODOS_PER_PAGE).skip(TODOS_PER_PAGE * page)

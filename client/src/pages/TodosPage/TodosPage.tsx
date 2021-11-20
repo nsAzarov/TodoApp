@@ -14,10 +14,21 @@ interface Props {
   editTask: (todo: ITodo) => void;
   toggleNoteDone: (id: string) => void;
   deleteTodo: (id: string) => void;
+  setOnlyDone: (val: boolean) => void;
 }
 
 export const TodosPage: FC<Props> = (props) => {
-  const { todos, pagesCount, activePage, setActivePage, createTodo, editTask, toggleNoteDone, deleteTodo } = props;
+  const {
+    todos,
+    pagesCount,
+    activePage,
+    setActivePage,
+    createTodo,
+    editTask,
+    toggleNoteDone,
+    deleteTodo,
+    setOnlyDone,
+  } = props;
 
   const [createTodoPageOpen, setCreateTodoPageOpen] = useState(false);
 
@@ -27,6 +38,7 @@ export const TodosPage: FC<Props> = (props) => {
 
   return (
     <div className={styles.wrapper}>
+      <button onClick={() => setOnlyDone(true)}>filter</button>
       <div className={styles.header}>All Tasks</div>
       <div className={styles.todosList}>
         {todos.map((todo) =>

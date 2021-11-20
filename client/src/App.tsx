@@ -10,6 +10,7 @@ export const App: FC = () => {
   const [todos, setTodos] = useState<ITodo[]>([]);
   const [activePage, setActivePage] = useState(0);
   const [pagesCount, setPagesCount] = useState(0);
+  const [onlyDone, setOnlyDone] = useState(false);
 
   const [doneTodosCount, setDoneTodosCount] = useState(0);
 
@@ -19,6 +20,11 @@ export const App: FC = () => {
     api.getTodos(activePage).then((res) => setTodos(res));
     api.getDoneTodosCount().then((res) => setDoneTodosCount(res));
   }, [activePage, api]);
+
+  useEffect(() => {
+    if (onlyDone) api.getDoneTodos(activePage).then((res) => setTodos(res));
+    else api.getTodos(activePage).then((res) => setTodos(res));
+  }, [onlyDone, api, activePage]);
 
   useEffect(() => {
     api.getPagesCount().then((res) => setPagesCount(res));
@@ -90,6 +96,7 @@ export const App: FC = () => {
       editTask={editTask}
       toggleNoteDone={toggleNoteDone}
       deleteTodo={deleteTodo}
+      setOnlyDone={setOnlyDone}
     />
   );
 };

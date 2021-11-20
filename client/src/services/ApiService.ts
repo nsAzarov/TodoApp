@@ -22,6 +22,11 @@ export class ApiService {
     return res.json();
   }
 
+  async getDoneTodos(page: number) {
+    const Todos = await this.getResource(`/DoneTodos/${page}`);
+    return Todos;
+  }
+
   async getDoneTodosCount() {
     const Todos = await this.getResource(`/DoneTodosCount`);
     return Todos;
