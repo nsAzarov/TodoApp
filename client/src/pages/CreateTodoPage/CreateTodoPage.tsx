@@ -23,25 +23,27 @@ export const CreateTodoPage: FC<Props> = (props) => {
   const [todoType, setTodoType] = useState(TodoType.Note);
 
   return (
-    <div className={styles.wrapper}>
-      <CloseIcon className={styles.closeIcon} onClick={close} />
+    <div className={styles.root}>
+      <div className={styles.wrapper}>
+        <CloseIcon className={styles.closeIcon} onClick={close} />
 
-      <div className={styles.switchTodoType}>
-        <div
-          className={clsx(styles.type, { [styles.selected]: todoType === TodoType.Note })}
-          onClick={() => setTodoType(TodoType.Note)}
-        >
-          Note
+        <div className={styles.switchTodoType}>
+          <div
+            className={clsx(styles.type, { [styles.selected]: todoType === TodoType.Note })}
+            onClick={() => setTodoType(TodoType.Note)}
+          >
+            Note
+          </div>
+          <div
+            className={clsx(styles.type, { [styles.selected]: todoType === TodoType.Task })}
+            onClick={() => setTodoType(TodoType.Task)}
+          >
+            Task
+          </div>
         </div>
-        <div
-          className={clsx(styles.type, { [styles.selected]: todoType === TodoType.Task })}
-          onClick={() => setTodoType(TodoType.Task)}
-        >
-          Task
-        </div>
+        {todoType === TodoType.Note && <CreateNoteForm createTodo={createTodo} close={close} />}
+        {todoType === TodoType.Task && <CreateTaskForm createTodo={createTodo} close={close} />}
       </div>
-      {todoType === TodoType.Note && <CreateNoteForm createTodo={createTodo} close={close} />}
-      {todoType === TodoType.Task && <CreateTaskForm createTodo={createTodo} close={close} />}
     </div>
   );
 };

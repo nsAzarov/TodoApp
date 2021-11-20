@@ -1,13 +1,14 @@
 @import 'src/global';
 
 .wrapper {
-  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
   height: 100vh;
   width: 100%;
+  max-width: 900px;
+  margin: auto;
 }
 
 .header {
@@ -35,6 +36,7 @@
   bottom: 5%;
   min-height: 50px;
   width: 50%;
+  max-width: 400px;
 }
 
 .pagination {

@@ -33,24 +33,26 @@ export const EditTaskPage: FC<Props> = (props) => {
   }, [edit, close, id, title, description, timeSpent, timeLeft, importance, status]);
 
   return (
-    <div className={styles.wrapper}>
-      <CloseIcon className={styles.closeIcon} onClick={close} />
-      <div className={styles.form}>
-        <div className={styles.label}>Title</div>
-        <input type='text' value={title} onChange={(e) => setTitle(e.target.value)} />
-        <div className={styles.label}>Description</div>
-        <input type='text' value={description} onChange={(e) => setDescription(e.target.value)} />
-        <div className={styles.label}>Time spent</div>
-        <input type='text' value={timeSpent} onChange={(e) => setTimeSpent(e.target.value)} />
-        <div className={styles.label}>Time left</div>
-        <input type='text' value={timeLeft} onChange={(e) => setTimeLeft(e.target.value)} />
-        <div className={styles.label}>Importance</div>
-        <ImportanceSelector importance={importance} setImportance={setImportance} />
-        <div className={styles.label}>Status</div>
-        <StatusSelector status={status} setStatus={setStatus} />
-        <PrimaryButton onClick={handleEdit} className={styles.submitButton}>
-          Edit
-        </PrimaryButton>
+    <div className={styles.root}>
+      <div className={styles.wrapper}>
+        <CloseIcon className={styles.closeIcon} onClick={close} />
+        <div className={styles.form}>
+          <div className={styles.label}>Title</div>
+          <input type='text' value={title} onChange={(e) => setTitle(e.target.value)} />
+          <div className={styles.label}>Description</div>
+          <input type='text' value={description} onChange={(e) => setDescription(e.target.value)} />
+          <div className={styles.label}>Time spent</div>
+          <input type='text' value={timeSpent} onChange={(e) => setTimeSpent(e.target.value)} />
+          <div className={styles.label}>Time left</div>
+          <input type='text' value={timeLeft} onChange={(e) => setTimeLeft(e.target.value)} />
+          <div className={styles.label}>Importance</div>
+          <ImportanceSelector importance={importance} setImportance={setImportance} />
+          <div className={styles.label}>Status</div>
+          <StatusSelector status={status} setStatus={setStatus} />
+          <PrimaryButton onClick={handleEdit} className={styles.submitButton}>
+            Edit
+          </PrimaryButton>
+        </div>
       </div>
     </div>
   );
