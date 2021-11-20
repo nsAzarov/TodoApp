@@ -1,5 +1,5 @@
-import { ITodo } from 'src/types';
 import Axios from 'axios';
+import { ITodo } from 'src/types';
 
 export class ApiService {
   private static instance: ApiService;

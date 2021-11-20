@@ -1,6 +1,7 @@
 import { FC, useState } from 'react';
 import { Note, PrimaryButton, Task } from 'src/components';
-import { INote, ITask, ITodo } from 'src/types';
+import { ITodo } from 'src/types';
+import { isNote } from 'src/utils';
 import { CreateTodoPage } from '../CreateTodoPage';
 import styles from './TodosPage.module.scss';
 
@@ -28,26 +29,13 @@ export const TodosPage: FC<Props> = (props) => {
     <div className={styles.wrapper}>
       <div className={styles.header}>All Tasks</div>
       <div className={styles.todosList}>
-        {todos.map((todo) => {
-          switch (todo.type) {
-            case 'NOTE':
-              return (
-                <Note
-                  key={todo.id}
-                  note={todo as INote}
-                  toggle={toggleNoteDone}
-                  del={deleteTodo}
-                  className={styles.todo}
-                />
-              );
-            case 'TASK':
-              return (
-                <Task key={todo.id} task={todo as ITask} edit={editTask} del={deleteTodo} className={styles.todo} />
-              );
-            default:
-              return null;
-          }
-        })}
+        {todos.map((todo) =>
+          isNote(todo) ? (
+            <Note key={todo.id} note={todo} toggle={toggleNoteDone} del={deleteTodo} className={styles.todo} />
+          ) : (
+            <Task key={todo.id} task={todo} edit={editTask} del={deleteTodo} className={styles.todo} />
+          ),
+        )}
         <div className={styles.pagination}>
           <div className={styles.arrow} onClick={() => setActivePage(activePage - 1)}>
             ←

@@ -1,9 +1,9 @@
 import { FC, useCallback, useEffect, useMemo, useState } from 'react';
 import './App.css';
-import { mapProtoTodo } from './mappings';
 import { StartPage, TodosPage } from './pages';
 import { ApiService } from './services';
 import { ITodo } from './types';
+import { isNote } from './utils';
 
 export const App: FC = () => {
   const [isStartPageOpen, setIsStartPageOpen] = useState(true);
@@ -16,7 +16,7 @@ export const App: FC = () => {
   const api = useMemo(() => ApiService.getInstance(), []);
 
   useEffect(() => {
-    api.getTodos(activePage).then((res) => setTodos(res.map(mapProtoTodo)));
+    api.getTodos(activePage).then((res) => setTodos(res));
     api.getDoneTodosCount().then((res) => setDoneTodosCount(res));
   }, [activePage, api]);
 
@@ -57,10 +57,10 @@ export const App: FC = () => {
 
   const toggleNoteDone = useCallback(
     (id: string) => {
-      const result = [];
+      const result: ITodo[] = [];
       for (const todo of todos) {
         if (todo.id !== id) result.push(todo);
-        else {
+        else if (isNote(todo)) {
           result.push({ ...todo, done: !todo.done });
           api.updateTodo({ ...todo, done: !todo.done });
         }

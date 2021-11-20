@@ -1,7 +1,4 @@
-import { ITask } from './ITask';
 import { INote } from './INote';
-import { TodoType } from './TodoType';
+import { ITask } from './ITask';
 
-export interface ITodo extends INote, ITask {
-  type: TodoType;
-}
+export type ITodo = ITask | INote;
