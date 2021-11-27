@@ -11,6 +11,8 @@ export const App: FC = () => {
   const [activePage, setActivePage] = useState(0);
   const [pagesCount, setPagesCount] = useState(0);
   const [onlyDone, setOnlyDone] = useState(false);
+  const [onlyNotes, setOnlyNotes] = useState(false);
+  const [onlyTasks, setOnlyTasks] = useState(false);
 
   const [doneTodosCount, setDoneTodosCount] = useState(0);
 
@@ -25,6 +27,16 @@ export const App: FC = () => {
     if (onlyDone) api.getDoneTodos(activePage).then((res) => setTodos(res));
     else api.getTodos(activePage).then((res) => setTodos(res));
   }, [onlyDone, api, activePage]);
+
+  useEffect(() => {
+    if (onlyNotes) api.getNotes(activePage).then((res) => setTodos(res));
+    else api.getTodos(activePage).then((res) => setTodos(res));
+  }, [onlyNotes, api, activePage]);
+
+  useEffect(() => {
+    if (onlyTasks) api.getTasks(activePage).then((res) => setTodos(res));
+    else api.getTodos(activePage).then((res) => setTodos(res));
+  }, [onlyTasks, api, activePage]);
 
   useEffect(() => {
     api.getPagesCount().then((res) => setPagesCount(res));
@@ -84,6 +96,21 @@ export const App: FC = () => {
     [api],
   );
 
+  const toggleOnlyDoneFilter = useCallback(() => {
+    if (onlyDone) setOnlyDone(false);
+    else setOnlyDone(true);
+  }, [onlyDone]);
+
+  const toggleOnlyNotesFilter = useCallback(() => {
+    if (onlyNotes) setOnlyNotes(false);
+    else setOnlyNotes(true);
+  }, [onlyNotes]);
+
+  const toggleOnlyTasksFilter = useCallback(() => {
+    if (onlyTasks) setOnlyTasks(false);
+    else setOnlyTasks(true);
+  }, [onlyTasks]);
+
   return isStartPageOpen ? (
     <StartPage goToAllTasks={() => setIsStartPageOpen(false)} doneTodosCount={doneTodosCount} />
   ) : (
@@ -96,7 +123,9 @@ export const App: FC = () => {
       editTask={editTask}
       toggleNoteDone={toggleNoteDone}
       deleteTodo={deleteTodo}
-      setOnlyDone={setOnlyDone}
+      toggleOnlyDoneFilter={toggleOnlyDoneFilter}
+      toggleOnlyNotesFilter={toggleOnlyNotesFilter}
+      toggleOnlyTasksFilter={toggleOnlyTasksFilter}
     />
   );
 };

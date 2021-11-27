@@ -29,6 +29,20 @@ mongoose
 
 const Todo = require('./models/Todo')
 
+app.get('/Notes/:page', async (req, res) => {
+    const page = req.params.page;
+    await Todo.find({}).where("done").ne(null).limit(TODOS_PER_PAGE).skip(TODOS_PER_PAGE * page)
+        .then(todos => res.json(todos))
+        .catch(err => console.log(err));
+})
+
+app.get('/Tasks/:page', async (req, res) => {
+    const page = req.params.page;
+    await Todo.find({}).where("description").ne(null).limit(TODOS_PER_PAGE).skip(TODOS_PER_PAGE * page)
+        .then(todos => res.json(todos))
+        .catch(err => console.log(err));
+})
+
 app.get('/DoneTodosCount', async (req, res) => {
     await Todo.find({
             done: true

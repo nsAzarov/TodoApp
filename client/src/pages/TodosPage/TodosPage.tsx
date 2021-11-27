@@ -14,7 +14,9 @@ interface Props {
   editTask: (todo: ITodo) => void;
   toggleNoteDone: (id: string) => void;
   deleteTodo: (id: string) => void;
-  setOnlyDone: (val: boolean) => void;
+  toggleOnlyDoneFilter: () => void;
+  toggleOnlyNotesFilter: () => void;
+  toggleOnlyTasksFilter: () => void;
 }
 
 export const TodosPage: FC<Props> = (props) => {
@@ -27,7 +29,9 @@ export const TodosPage: FC<Props> = (props) => {
     editTask,
     toggleNoteDone,
     deleteTodo,
-    setOnlyDone,
+    toggleOnlyDoneFilter,
+    toggleOnlyNotesFilter,
+    toggleOnlyTasksFilter,
   } = props;
 
   const [createTodoPageOpen, setCreateTodoPageOpen] = useState(false);
@@ -38,8 +42,12 @@ export const TodosPage: FC<Props> = (props) => {
 
   return (
     <div className={styles.wrapper}>
-      <button onClick={() => setOnlyDone(true)}>filter</button>
       <div className={styles.header}>All Tasks</div>
+      <div className={styles.filters}>
+        <button onClick={toggleOnlyDoneFilter}>Done</button>
+        <button onClick={toggleOnlyNotesFilter}>Notes</button>
+        <button onClick={toggleOnlyTasksFilter}>Tasks</button>
+      </div>
       <div className={styles.todosList}>
         {todos.map((todo) =>
           isNote(todo) ? (
